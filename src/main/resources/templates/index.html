@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="contTitleStudents">
+			<h1>Alumnos</h1>
+		</div>
+		<div class="contNewStudent">
+			<form class="formNewStudent" th:action="@{/newSt}" th:object="${st}" method="post">
+				<fieldset>
+					<legend>Añadir</legend>
+					<div class="contNewStudentName">
+						<label for="name">Nombre</label>
+						<input id="name" th:field="*{name}" />
+					</div>
+					<div class="contNewStudentLastname">
+						<label for="lastname">Apellido</label>
+						<input id="lastname" th:field="*{lastname}" />
+					</div>
+					<div class="contNewStudentButtonSave">
+						<button id="saveStudent" name="saveStudent" type="submit">Guardar</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="contStudentList">
+			<!--form class="formListStudents" th:action="@{/deleteSt}" th:object="${student}" method="post"-->
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th colspan="2">Acción</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="student : ${students}">
+						<td th:text="${student.id}"></td>
+						<td th:text="${student.name}"></td>
+						<td th:text="${student.lastname}"></td>
+						<!--td><button id="editStudent" name="editStudent">Editar</button></td-->
+						<td><button th:data-id="${student.id}" name="deleteStudent" onClick="deleteStudent(this);">Eliminar</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<!--/form-->
+		</div>
+	</div>
+	<script src="js/script.js"></script>
+</body>
+
+</html>
