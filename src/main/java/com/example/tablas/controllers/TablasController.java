@@ -1,30 +1,33 @@
 package com.example.tablas.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.tablas.entity.Student;
-import com.example.tablas.repository.StudentRepository;
+import com.example.tablas.services.StudentService;
 
 @Controller
 public class TablasController {
 
 	@Autowired
-	private StudentRepository studentRepository;
+	private StudentService studentService;
 
 	@GetMapping("/")
 	public String passStudentData(Model model) {
-
-		List<Student> students = studentRepository.findAll();
+		
+		List<Student> students = studentService.findAll();
 		model.addAttribute("students", students);
 		model.addAttribute("st", new Student());
+				
 		return "index";
 
 	}
@@ -32,34 +35,28 @@ public class TablasController {
 	@PostMapping("/newSt")
 	public String saveNewStudent(@ModelAttribute Student student, Model model) {
 
-		studentRepository.save(student);
+		studentService.save(student);
 		return "redirect:/";
 	}
 
-	/*
-	 * @PostMapping(value="/deleteSt") public String
-	 * deleteStudent(@RequestParam("idStudent") String[] name, Model model) {
-	 * 
-	 * String[] nameNew = name; studentRepository.deleteById(nameNew[1]);
-	 * 
-	 * return ("redirect:/"); }
-	 */
 	
-	@PostMapping("/deleteSt")
-	
-	public String deleteStudent(@RequestParam("idStudent") String id, Model model) {
+	@PostMapping("/deleteSt")	
+	public String deleteStudent(@RequestBody Student st) {
+
+	 studentService.deleteById((long)st.getId());
+	 return "redirect:/";
 	 
-	 studentRepository.deleteById(Long.parseLong(id));
-	 
-	 return ("redirect:/"); }
+	 }
 	
-	/*
-	@PostMapping(value="/deleteSt")
-	public String deleteStudent(@ModelAttribute Student student, Model model) {
-				
-		studentRepository.deleteById((long)student.getId());
+	/*@PostMapping("/editSt")
+	public String editStudent(@ModelAttribute Student student, Model model) {
 		
-		return ("redirect:/");
+		studentService.findById(student);
+		model.addAttribute("student", students);
+		model.addAttribute("st", new Student());
+		studentService.findById(student);
+				
+		return "redirect:/";
 		
 	} */
 

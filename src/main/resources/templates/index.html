@@ -18,7 +18,7 @@
 					<legend>Añadir</legend>
 					<div class="contNewStudentName">
 						<label for="name">Nombre</label>
-						<input id="name" th:field="*{name}" />
+						<input id="name" th:field="*{name}" th:text="${name}"/>
 					</div>
 					<div class="contNewStudentLastname">
 						<label for="lastname">Apellido</label>
@@ -30,8 +30,7 @@
 				</fieldset>
 			</form>
 		</div>
-		<div class="contStudentList">
-			<!--form class="formListStudents" th:action="@{/deleteSt}" th:object="${student}" method="post"-->
+		<div class="contStudentList">		
 			<table>
 				<thead>
 					<tr>
@@ -46,12 +45,11 @@
 						<td th:text="${student.id}"></td>
 						<td th:text="${student.name}"></td>
 						<td th:text="${student.lastname}"></td>
-						<!--td><button id="editStudent" name="editStudent">Editar</button></td-->
+						<td><button th:data-id="${student.id}" name="editStudent" onClick="editStudent(this)">Editar</button></td>
 						<td><button th:data-id="${student.id}" name="deleteStudent" onClick="deleteStudent(this);">Eliminar</button></td>
 					</tr>
 				</tbody>
 			</table>
-			<!--/form-->
 		</div>
 	</div>
 	<script src="js/script.js"></script>
