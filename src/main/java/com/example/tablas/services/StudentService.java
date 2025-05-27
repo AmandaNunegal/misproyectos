@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.tablas.dtos.StudentDto;
 import com.example.tablas.entity.Student;
+import com.example.tablas.mappers.StudentMapper;
 import com.example.tablas.repository.StudentRepository;
 
 @Service
@@ -33,14 +35,14 @@ public class StudentService {
 		
 	}
 	
-	public Student findById(Student student) {
-		
+	public StudentDto findById(Student student) {
+				
 		Optional<Student> st = studentRepository.findById(student.getId());
 		if (st.isPresent()) {
-			return st.get();
-			//studentRepository.save(st.get());
+			return StudentMapper.mapper.toStudentDto(student);			
 		}
-		return null;
+		return null;	
 		
 	}
+	
 }

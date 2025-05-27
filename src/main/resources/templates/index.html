@@ -51,8 +51,7 @@
 								name="editStudent">Editar</button></td>
 						<td><button class="btn buttonStudentDelete" th:data-id="${student.id}"
 								name="deleteStudent">Eliminar</button></td>
-						<td><a href="/tablas/holaAlumnos">Saludar</button></td>
-						<td><button id="botonHola">Saludar2</td>
+						<!--td><a href="/tablas/holaAlumnos">Saludar</button></td-->						
 					</tr>
 				</tbody>
 			</table>
@@ -61,10 +60,10 @@
 				<fieldset>
 							<legend>Editar</legend>
 							<div class="contEditStudentName">
-								<label for="nameStudent">Nombre</label>
+								<label for="nameStudentForm2">Nombre</label>
 								<input id="nameStudent" th:text="${name}" />
 							</div>
-							<div class="contEditStudentLastname">
+							<div class="contEditStudentLastnameForm2">
 								<label for="lastnameStudent">Apellido</label>
 								<input id="lastnameStudent" th:text="${lastname}" />
 							</div>

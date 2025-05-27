@@ -19,9 +19,10 @@ public class TablasController {
 
 	@Autowired
 	private StudentService studentService;
-
+		
+	
 	@GetMapping("/")
-	public String passStudentData(Model model) {
+	public String findAllStudents(Model model) {
 		
 		List<Student> students = studentService.findAll();
 		model.addAttribute("students", students);
@@ -58,6 +59,14 @@ public class TablasController {
 
 	@GetMapping("/holaAlumnos")
 	public String helloStudent() {
+		
+		return "hola";
+		
+	}
+	
+	
+	@PostMapping("/showByStudentId")
+	public String findByStudentId() {
 		
 		return "hola";
 		

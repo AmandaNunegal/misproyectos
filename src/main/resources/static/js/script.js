@@ -1,5 +1,5 @@
-let nameStudentForm= document.getElementById("nameStudent");
-let lastnameStudentForm = document.getElementById("lastnameStudent");
+let nameStudentForm2 = document.getElementById("nameStudent");
+let lastnameStudentForm2 = document.getElementById("lastnameStudent");
 let idActual;
 
 function saveStudent() {
@@ -43,19 +43,13 @@ function edStudent(e) {
 	idActual = studentId;
 
 	let nameStudentTable = document.getElementsByClassName("nameStudentTable");
+	let lastnameStudentTable = document.getElementsByClassName("lastnameStudentTable");
 	for (let i = 0; i < nameStudentTable.length; i++) {
 		if (nameStudentTable[i].dataset.id == idActual) {
-			nameStudentForm.value = nameStudentTable[i].textContent;
+			nameStudentForm2.value = nameStudentTable[i].textContent;
+			lastnameStudentForm2.value = lastnameStudentTable[i].textContent;
 		}
 	}
-
-	let lastnameStudentTable = document.getElementsByClassName("lastnameStudentTable");
-	for (let i = 0; i < lastnameStudentTable.length; i++) {
-		if (lastnameStudentTable[i].dataset.id == idActual) {
-			lastnameStudentForm.value = lastnameStudentTable[i].textContent;
-		}
-	}
-
 
 }
 
@@ -63,30 +57,34 @@ function edStudent(e) {
 function saveEdStudent() {
 
 	const xhttp = new XMLHttpRequest();
-	let nameStudentT = document.getElementsByClassName("nameStudentTable")[idActual];
+	
+	let nameStudentT = document.getElementsByClassName("nameStudentTable");	
+	let lastnameStudentT = document.getElementsByClassName("lastnameStudentTable");
+	
+	
 	xhttp.onload = function() {
 		if (xhttp.status >= 200 && xhttp.status < 300) {
+			for (let i = 0; i < nameStudentT.length; i++) {
+				if (nameStudentT[i].dataset.id == idActual) {
+					nameStudentT[i].textContent = nameStudentForm2.value;
+					lastnameStudentT[i].textContent = lastnameStudentForm2.value;
+				}
+			}
 			
-			alert(nameStudentT.value);
+
 		}
 	}
 	xhttp.open("POST", "/tablas/editSt");
 	xhttp.setRequestHeader("Content-type", "application/json");
 	xhttp.send(JSON.stringify({
 		"id": idActual,
-		"name": nameStudentForm.value,
-		"lastname": lastnameStudentForm.value
+		"name": nameStudentForm2.value,
+		"lastname": lastnameStudentForm2.value
 	}));
 }
 
-
-//window.location.href = "/tablas/holaAlumnos";
-
-
 let buttonEditStudent = document.getElementsByClassName("buttonStudentEdit");
-for (let i = 0; i < buttonEditStudent.length; i++) {
-	/* buttonEditStudent[i].addEventListener("click", function(event) {
-		edStudent(event); */
+for (let i = 0; i < buttonEditStudent.length; i++) {	
 	buttonEditStudent[i].addEventListener("click", edStudent);
 }
 
@@ -98,3 +96,5 @@ for (let i = 0; i < buttonDeleteStudent.length; i++) {
 let buttonSaveEditStudent = document.getElementById("editStudent");
 buttonSaveEditStudent.addEventListener("click", saveEdStudent);
 
+// buttonEditStudent[i].addEventListener("click", function(event) { edStudent(event); } 
+//window.location.href = "/tablas/holaAlumnos";
