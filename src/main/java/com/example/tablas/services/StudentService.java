@@ -33,14 +33,14 @@ public class StudentService {
 		
 	}
 	
-	/*public Optional<Student> findById(Student student) {
+	public Student findById(Student student) {
 		
-		Optional<Student> st = studentRepository.findById(student.getId())
+		Optional<Student> st = studentRepository.findById(student.getId());
 		if (st.isPresent()) {
-			return studentRepository.findById(st.get().getId())
+			return st.get();
 			//studentRepository.save(st.get());
 		}
-		return Optional.empty();
+		return null;
 		
-	}*/
+	}
 }

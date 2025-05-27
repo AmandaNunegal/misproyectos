@@ -1,7 +1,6 @@
 package com.example.tablas.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,16 +25,17 @@ public class TablasController {
 		
 		List<Student> students = studentService.findAll();
 		model.addAttribute("students", students);
-		model.addAttribute("st", new Student());
+		model.addAttribute("st", new Student());			
 				
 		return "index";
 
 	}
 
 	@PostMapping("/newSt")
-	public String saveNewStudent(@ModelAttribute Student student, Model model) {
-
+	public String saveNewStudent(@ModelAttribute Student student) {
+		
 		studentService.save(student);
+		
 		return "redirect:/";
 	}
 
@@ -48,16 +48,20 @@ public class TablasController {
 	 
 	 }
 	
-	/*@PostMapping("/editSt")
-	public String editStudent(@ModelAttribute Student student, Model model) {
+	@PostMapping("/editSt")
+	public ResponseEntity<String> editStudent(@RequestBody Student st) {
 		
-		studentService.findById(student);
-		model.addAttribute("student", students);
-		model.addAttribute("st", new Student());
-		studentService.findById(student);
-				
-		return "redirect:/";
+		studentService.save(st);
+		return ResponseEntity.ok("El alumno se ha modificado correctamente");	
+	}
+	
+
+	@GetMapping("/holaAlumnos")
+	public String helloStudent() {
 		
-	} */
+		return "hola";
+		
+	}
+	
 
 }

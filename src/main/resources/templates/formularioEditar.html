@@ -1,0 +1,18 @@
+<div th:fragment="fragmentoFormularioEditar">
+	<form class="formEditStudent" th:action="@{/editSt}" th:object="${student}" method="post">
+		<fieldset>
+			<legend>Editar</legend>
+			<div class="contEditStudentName">
+				<label for="nameStudent">Nombre</label>
+				<input id="nameStudent" th:text="${name}" />
+			</div>
+			<div class="contEditStudentLastname">
+				<label for="lastnameStudent">Apellido</label>
+				<input id="lastnameStudent" th:text="${lastname}" />
+			</div>
+			<div class="contEditStudentButtonEdit">
+				<button id="editStudent" name="editStudent" type="submit">Guardar</button>
+			</div>
+		</fieldset>
+	</form>
+</div>
