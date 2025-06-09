@@ -13,5 +13,6 @@ public class Student {
 	
 	private String name;
 	private String lastname;
+	private String country;
 
 }

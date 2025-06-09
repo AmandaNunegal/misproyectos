@@ -6,71 +6,99 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.tablas.dtos.StudentDto;
 import com.example.tablas.entity.Student;
+import com.example.tablas.mappers.StudentMapper;
 import com.example.tablas.services.StudentService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class TablasController {
 
 	@Autowired
 	private StudentService studentService;
-		
-	
+
 	@GetMapping("/")
 	public String findAllStudents(Model model) {
-		
-		List<Student> students = studentService.findAll();
+
+		List<StudentDto> students = StudentMapper.mapper.toListStudentDto(studentService.findAll());
 		model.addAttribute("students", students);
-		model.addAttribute("st", new Student());			
-				
+		model.addAttribute("st", new StudentDto());
+		model.addAttribute("std", new StudentDto());
+		
 		return "index";
 
 	}
 
-	@PostMapping("/newSt")
-	public String saveNewStudent(@ModelAttribute Student student) {
-		
-		studentService.save(student);
+	@PostMapping("/")
+	//public String saveNewStudent(@Valid @ModelAttribute("st") StudentDto st, BindingResult bindingResult, Model model) {
+	public String saveNewStudent(@Valid @ModelAttribute("st") StudentDto stDto, BindingResult bindingResult, Model model) {
+			
+	
+		if (bindingResult.hasErrors()) {
+			List<StudentDto> students = StudentMapper.mapper.toListStudentDto(studentService.findAll());
+			model.addAttribute("students", students);
+			model.addAttribute("std", new StudentDto());
+			//model.addAttribute("errors", bindingResult.getAllErrors());
+
+			return "index";
+			
+			//return "redirect:/index?anchor='formEditModal'";
+		}
+
+		studentService.save(StudentMapper.mapper.toEntity(stDto));
 		
 		return "redirect:/";
 	}
 
-	
-	@PostMapping("/deleteSt")	
-	public String deleteStudent(@RequestBody Student st) {
+	@PostMapping("/deleteSt")
+	public String deleteStudent(@RequestBody StudentDto stDto) {
 
-	 studentService.deleteById((long)st.getId());
-	 return "redirect:/";
-	 
-	 }
-	
+		studentService.deleteById((long) stDto.getId());
+		return "redirect:/";
+
+	}
+
 	@PostMapping("/editSt")
-	public ResponseEntity<String> editStudent(@RequestBody Student st) {
+	//public String editStudent(@Valid @ModelAttribute("std")StudentDto stDto, BindingResult bindingResult, Model model) {
+	public String editStudent(@ModelAttribute("std")StudentDto stDto, Model model) {
+		/*if (bindingResult.hasErrors()) {
+			List<StudentDto> students = StudentMapper.mapper.toListStudentDto(studentService.findAll());
+			model.addAttribute("students", students);
+			model.addAttribute("st", new StudentDto());
+			return "index";
+		}*/
 		
-		studentService.save(st);
-		return ResponseEntity.ok("El alumno se ha modificado correctamente");	
+		studentService.save(StudentMapper.mapper.toEntity(stDto));
+		return "redirect:/";
 	}
-	
 
-	@GetMapping("/holaAlumnos")
-	public String helloStudent() {
-		
-		return "hola";
-		
+	@GetMapping("/pruebaB")
+	public String pruebaB() {
+
+		return "pruebabootstrap";
 	}
-	
-	
+
 	@PostMapping("/showByStudentId")
 	public String findByStudentId() {
-		
+
 		return "hola";
-		
+
 	}
-	
+
+	@GetMapping("/showByStudentId2/{id}")
+	public ResponseEntity<StudentDto> findByStudentId(@PathVariable long id) {
+
+		return ResponseEntity.ok(StudentMapper.mapper.toStudentDto(studentService.findById(id)));
+
+	}
 
 }

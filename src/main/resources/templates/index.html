@@ -6,76 +6,113 @@
 	<title>Alumnos</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<div class="contTitleStudents">
-			<h1>Alumnos</h1>
-		</div>
-		<div class="contNewStudent">
-			<form class="formNewStudent" th:action="@{/newSt}" th:object="${st}" method="post">
-				<fieldset>
-					<legend>Añadir</legend>
-					<div class="contNewStudentName">
-						<label for="name">Nombre</label>
-						<input id="name" th:field="*{name}" />
-					</div>
-					<div class="contNewStudentLastname">
-						<label for="lastname">Apellido</label>
-						<input id="lastname" th:field="*{lastname}" />
-					</div>
-					<div class="contNewStudentButtonSave">
-						<button id="saveStudent" name="saveStudent" type="submit">Guardar</button>
-					</div>
-				</fieldset>
-			</form>
-		</div>
-		<div class="contStudentList">
-			<table>
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Nombre</th>
-						<th>Apellidos</th>
-						<th colspan="4">Acción</th>
-					</tr>
-				</thead>
-				<tbody>  
-					<tr th:each="student : ${students}">
-						<td th:text="${student.id}"></td>
-						<td class="nameStudentTable" th:data-id="${student.id}" th:text="${student.name}"></td>
-						<td class="lastnameStudentTable" th:data-id="${student.id}" th:text="${student.lastname}"></td>
-						<td><button class="buttonStudentEdit" th:data-id="${student.id}"
-								name="editStudent">Editar</button></td>
-						<td><button class="btn buttonStudentDelete" th:data-id="${student.id}"
-								name="deleteStudent">Eliminar</button></td>
-						<!--td><a href="/tablas/holaAlumnos">Saludar</button></td-->						
-					</tr>
-				</tbody>
-			</table>
-<!--			<div th:include="formularioEditar :: fragmentoFormularioEditar"></div>-->
-			<div>
-				<fieldset>
-							<legend>Editar</legend>
-							<div class="contEditStudentName">
-								<label for="nameStudentForm2">Nombre</label>
-								<input id="nameStudent" th:text="${name}" />
-							</div>
-							<div class="contEditStudentLastnameForm2">
-								<label for="lastnameStudent">Apellido</label>
-								<input id="lastnameStudent" th:text="${lastname}" />
-							</div>
-							<div class="contEditStudentButtonEdit">
-								<button id="editStudent" name="editStudent">Guardar</button>
-							</div>
-						</fieldset>
+	<div class="container p-0">
+		<div class="row">
+			<div class="panelTop h3 text-center text-white m-0 shadow p-4">
+				Instituto Miranda
 			</div>
 		</div>
-		<div th:include="hola :: fragmentHello"></div>		
+		<div class="row">
+			<div class="col-9 p-0">
+				<div class="h3 text-center panelSec text-white shadow p-4">Alumnos</div>
+				<div class=" d-flex justify-content-center flex-column">
+					<div class="tablePanelstudentTable">
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">Id</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Apellidos</th>
+									<th class="text-center" scope="col" colspan="2"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="student : ${students}" class="rowTableStudent" th:data-id="${student.id}">
+									<td th:text="${student.id}"></td>
+									<td class="nameStudentTable" th:data-id="${student.id}" th:text="${student.name}">
+									</td>
+									<td class="surnameStudentTable" th:data-id="${student.id}"
+										th:text="${student.surname}">
+									</td>
+									<td><button class="btn buttonStudentEdit" data-bs-toggle="modal"
+											data-bs-target="#formEditModal" th:data-id="${student.id}"
+											name="editStudent"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+												height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+												<path
+													d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
+											</svg></button></td>
+									<td><button class="btn buttonStudentDelete" th:data-id="${student.id}"
+											name="deleteStudent"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+												height="16" fill="currentColor" class="bi bi-trash3"
+												viewBox="0 0 16 16">
+												<path
+													d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+											</svg></button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal" id="formEditModal" th:data-id="form2" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Editar</h5>
+							</div>
+							<div class="modal-body">
+								<form th:action="@{/editSt}" th:object="${std}" method="post">
+									<div class="contEditStudentName">
+										<label for="nameStudentForm2">Nombre</label>
+										<input id="nameStudent" th:text="${name}" />										
+									</div>
+									<div class="contEditStudentsurnameForm2">
+										<label for="surnameStudent">Apellido</label>
+										<input id="surnameStudent" th:text="${surname}" />										
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+									aria-hidden="true">Cerrar</button>
+								<button type="button" id="editStudent" name="editStudent"
+									class="btn btn-primary" data-bs-dismiss="modal">Guardar cambios</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3 newPanel">
+				<div class="newStudentForm mx-auto">
+					<h3 class="newTitle h3 p-4 text-white text-center">Nuevo</h3>
+					<form class="formNewStudent shadow p-3 mb-5 bg-white" th:action="@{/}" th:object="${st}"
+						method="post">
+						<div class="mb-30">
+							<label th:for="name" class="form-label">Nombre</label>
+							<input type="text" class="form-control" th:field="*{name}" aria-describedby="studentName" />
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+							</div>
+						</div>
+						<div class="mb-3">
+							<label th:for="surname" class="form-label">Apellido</label>
+							<input type="text" class="form-control" th:field="*{surname}"
+								aria-describedby="studentSurname" />
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{name}">
+							</div>
+						</div>
+						<div>
+							<button class="btn btn-secondary" id="saveStudent" name="saveStudent"
+								type="submit">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="js/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

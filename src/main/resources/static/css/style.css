@@ -1,77 +1,20 @@
-* {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+body {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 2em;
 }
 
-
-.container {
-	display: flex;
-	flex-direction:column;
-	align-items: center;
-	justify-content: center;
+.studentTitle, .newPanel {
+	background-color: #90bdbd;
 }
 
-table, td, th {
-	border: 1px solid gray;
-	border-collapse: collapse;
-	text-align: center;
-	margin: 3em;
+.panelTop {
+	
+	background-color: rgb(92, 154, 154);
+
 }
 
-th {
-	padding: 0.8em;
-	border: 1px solid #F2F2F2;
-	background-color:gray;
-	color:#F2F2F2;
-}
-
-td{
-	padding: 1em;
-}
-
-.formNewStudent {
-	display: flex;
-	flex-direction: column;
-	margin: 1em;
-}
-
-.contNewStudentButtonSave {
-	display: flex;
-	justify-content: center;
-}
-
-h1 {
-	margin: 0.3em;
-}
-
-label {
-	margin: 0.5em;
-	padding-right: 0.2em;
-}
-
-input {
-	margin: 0.8em;
-}
-
-button[id="saveStudent"] {
-	width: 8em;
-	margin: 0.5em;
-	padding: 0.3em;
-}
-
-button[id="editStudent"] {
-	width: 6em;
-	margin: 0.5em;
-	padding: 0.3em;
-}
-
-button[id="deleteStudent"] {
-	width: 6em;
-	margin: 0.5em;
-	padding: 0.3em;
-}
-
-fieldset {
-	padding: 0.1em;
+.panelSec {
+	
+	background-color:  rgb(69, 116, 116);
+	
 }

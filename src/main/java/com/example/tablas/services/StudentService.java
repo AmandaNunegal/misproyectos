@@ -21,7 +21,9 @@ public class StudentService {
 	public List<Student> findAll() {
 				
 		return studentRepository.findAll();
+
 	}
+	
 	
 	public void save(Student student) {
 		
@@ -35,11 +37,11 @@ public class StudentService {
 		
 	}
 	
-	public StudentDto findById(Student student) {
+	public Student findById(long id) {
 				
-		Optional<Student> st = studentRepository.findById(student.getId());
+		Optional<Student> st = studentRepository.findById(id);
 		if (st.isPresent()) {
-			return StudentMapper.mapper.toStudentDto(student);			
+			return st.get();			
 		}
 		return null;	
 		
