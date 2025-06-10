@@ -8,11 +8,20 @@ import lombok.Data;
 public class Student {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
 	private String lastname;
 	private String country;
 
+	public Student() {
+		
+	}
+	
+	public Student(String name, String lastname) {
+		this.name = name;
+		this.lastname = lastname;
+		this.country = null;
+	}
 }
