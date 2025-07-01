@@ -23,24 +23,30 @@ public class StudentService {
 
 	public Student save(Student student) {
 
-		studentRepository.save(student);
-		return student;
+		return studentRepository.save(student);
 
 	}
 
-	public void deleteById(long id) {
+	
+	/* public List<Student> saveAll(List<Student> listStudent) {
+
+		return studentRepository.saveAll(listStudent);
+		
+
+	} */
+
+	public void deleteById(Long id) {
 
 		studentRepository.deleteById(id);
 
 	}
 
-	public Student findById(long id) {
+	public Optional<Student> findById(Long id) {
 
-		Optional<Student> st = studentRepository.findById(id);
-		if (st.isPresent()) {
-			return st.get();
+		if (id == null) {
+			throw new IllegalArgumentException("El id no puede ser nulo");
 		}
-		return null;
+		return studentRepository.findById(id);
 
 	}
 

@@ -24,4 +24,6 @@ public class Student {
 		this.lastname = lastname;
 		this.country = null;
 	}
+	
+	
 }

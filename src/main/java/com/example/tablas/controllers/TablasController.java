@@ -33,72 +33,86 @@ public class TablasController {
 		model.addAttribute("students", students);
 		model.addAttribute("st", new StudentDto());
 		model.addAttribute("std", new StudentDto());
-		
+
 		return "index";
 
 	}
 
 	@PostMapping("/")
-	//public String saveNewStudent(@Valid @ModelAttribute("st") StudentDto st, BindingResult bindingResult, Model model) {
-	public String saveNewStudent(@Valid @ModelAttribute("st") StudentDto stDto, BindingResult bindingResult, Model model) {
-			
-	
+	public String saveNewStudent(@Valid @ModelAttribute("st") StudentDto stDto, BindingResult bindingResult,
+			Model model) {
+
 		if (bindingResult.hasErrors()) {
 			List<StudentDto> students = StudentMapper.mapper.toListStudentDto(studentService.findAll());
 			model.addAttribute("students", students);
-			model.addAttribute("std", new StudentDto());
-			//model.addAttribute("errors", bindingResult.getAllErrors());
+			model.addAttribute("std", new StudentDto());			
 
 			return "index";
-			
-			//return "redirect:/index?anchor='formEditModal'";
+
 		}
 
 		studentService.save(StudentMapper.mapper.toEntity(stDto));
-		
+
 		return "redirect:/";
 	}
 
-	@PostMapping("/deleteSt")
-	public String deleteStudent(@RequestBody StudentDto stDto) {
+	@PostMapping("/deleteSt") //RequestBody
+	public String deleteStudent(@ModelAttribute StudentDto stDto) {
 
-		studentService.deleteById((long) stDto.getId());
+		studentService.deleteById((long) (stDto.getId()));
 		return "redirect:/";
 
 	}
 
 	@PostMapping("/editSt")
-	//public String editStudent(@Valid @ModelAttribute("std")StudentDto stDto, BindingResult bindingResult, Model model) {
-	public String editStudent(@ModelAttribute("std")StudentDto stDto, Model model) {
-		/*if (bindingResult.hasErrors()) {
-			List<StudentDto> students = StudentMapper.mapper.toListStudentDto(studentService.findAll());
-			model.addAttribute("students", students);
-			model.addAttribute("st", new StudentDto());
-			return "index";
-		}*/
-		
+	public String editStudent(@ModelAttribute("std") StudentDto stDto) { //Model model
+
 		studentService.save(StudentMapper.mapper.toEntity(stDto));
 		return "redirect:/";
 	}
 
-	@GetMapping("/pruebaB")
-	public String pruebaB() {
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * @PostMapping("/editSt") public String
+	 * editStudent(@Valid @ModelAttribute("std")StudentDto stDto, BindingResult
+	 * bindingResult, Model model) {
+	 * 
+	 * if (bindingResult.hasErrors()) { List<StudentDto> students =
+	 * StudentMapper.mapper.toListStudentDto(studentService.findAll());
+	 * model.addAttribute("students", students); model.addAttribute("st", new
+	 * StudentDto()); return "index"; }
+	 * 
+	 * studentService.save(StudentMapper.mapper.toEntity(stDto)); return
+	 * "redirect:/"; }
+	 */
 
-		return "pruebabootstrap";
-	}
-
-	@PostMapping("/showByStudentId")
-	public String findByStudentId() {
-
-		return "hola";
-
-	}
-
-	@GetMapping("/showByStudentId2/{id}")
-	public ResponseEntity<StudentDto> findByStudentId(@PathVariable long id) {
-
-		return ResponseEntity.ok(StudentMapper.mapper.toStudentDto(studentService.findById(id)));
-
-	}
-
+	/*
+	 * @GetMapping("/pruebaB") public String pruebaB() {
+	 * 
+	 * return "pruebabootstrap"; }
+	 * 
+	 * @PostMapping("/showByStudentId") public String findByStudentId() {
+	 * 
+	 * return "hola";
+	 * 
+	 * }
+	 * 
+	 * @GetMapping("/showByStudentId2/{id}") public ResponseEntity<StudentDto>
+	 * findByStudentId(@PathVariable long id) {
+	 * 
+	 * return
+	 * ResponseEntity.ok(StudentMapper.mapper.toStudentDto(studentService.findById(
+	 * id)));
+	 * 
+	 * }
+	 */
+	
+	// model.addAttribute("errors", bindingResult.getAllErrors());
+	// return "redirect:/index?anchor='formEditModal'";
 }

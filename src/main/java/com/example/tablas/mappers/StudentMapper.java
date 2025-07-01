@@ -26,6 +26,8 @@ public interface StudentMapper {
 	
 	List<StudentDto> toListStudentDto(List<Student> students);
 	
+	List<Student> toListStudent(List<StudentDto> studentsDto);
+	
 	/* @AfterMapping
 	default void setFullName(@MappingTarget StudentDto studentDto, Student student) {
 		studentDto.setFullName(student.getName() + " " + student.getLastname());
