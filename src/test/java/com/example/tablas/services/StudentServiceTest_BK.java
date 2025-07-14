@@ -26,33 +26,50 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.example.tablas.dataprovider.DataProvider;
 import com.example.tablas.dataprovider.DataProvider2;
 import com.example.tablas.dataprovider.StudentDataTest;
+import com.example.tablas.dtos.StudentDto;
 import com.example.tablas.entity.Student;
 import com.example.tablas.repository.StudentRepository;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 //when(studentService.findById(1L)).thenReturn(student);
 //when(studentService.findById(500L)).thenReturn(null);
 
 @ExtendWith(MockitoExtension.class)
-public class StudentServiceTest {
+public class StudentServiceTest_BK {
 
-	private Student studentComplete;
-	private Student studentWithoutCountry;
-	private Student studentEmpty;
-	private Student studentNull;
-	private Student studentSpaces;
-	private Student studentShort;
-	private Student studentLong;
-	private Student studentSpecialChar;
-	private Student studentLimitMin;
-	private Student studentLimitMax;
-	private List<Student> listStudent;
-		
 	private static StudentDataTest testData;
-	
+	private static List<Student> listStudent;
+	private static List<StudentDto> listStudentDto;
+	private static Student studentComplete;
+	private static StudentDto studentDto1;
+	private static Student student1IdNull;
+	private static StudentDto studentDto1IdNull;
+	private static Student student2;
+	private static StudentDto studentDto2;
+	private static Optional<Student> studentOptional;
+	private static Student studentEmptyName;
+	private static Student studentEmptyLastname;
+	private static Student studentNullName;
+	private static Student studentNullLastname;
+	private static Student studentSpacesName;
+	private static Student studentSpacesLastname;
+	private static Student studentNull;
+	private static Student studentShortName;
+	private static Student studentShortLastname;
+	private static Student studentLongName;
+	private static Student studentLongLastname;
+	private static Student studentSpecialCharName;
+	private static Student studentSpecialCharLastname;
+	private static Student studentLimitMinName;
+	private static Student studentLimitMinLastname;
+	private static Student studentLimitMaxName;
+	private static Student studentLimitMaxLastname;
+
 	private static Stream<Student> studentOk() {
-		return Stream.of(studentComplete, studentLimitMin, studentLimitMin, studentLimitMax,
-				studentLimitMax);
+		return Stream.of(studentComplete, studentLimitMinName, studentLimitMinLastname, studentLimitMaxName,
+				studentLimitMaxLastname);
 	}
 
 	@Mock
@@ -65,7 +82,7 @@ public class StudentServiceTest {
 	public void setUp() throws IOException {
 
 		ObjectMapper oMapper = new ObjectMapper();
-		try (InputStream inputStream = StudentServiceTest.class.getClassLoader()
+		try (InputStream inputStream = StudentServiceTest_BK.class.getClassLoader()
 				.getResourceAsStream("data/testData.json")) {
 			testData = oMapper.readValue(inputStream, StudentDataTest.class);
 		}

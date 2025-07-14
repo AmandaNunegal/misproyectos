@@ -1,0 +1,70 @@
+{
+	"studentComplete": {
+		"id": 10,
+		"name": "Alicia",
+		"lastname": "Sánchez",
+		"country": "España"
+	},
+	"studentWithoutCountry": {
+		"id": 10,
+		"name": "Alicia",
+		"lastname": "Sánchez"
+	},
+	"studentEmpty": {
+		"id": 10,
+		"name": "",
+		"lastname": ""
+	},
+	"studentNull": {
+		"id": 10,
+		"name": null,
+		"lastname": null
+	},
+	"studentSpaces": {
+		"id": 10,
+		"name": " ",
+		"lastname": " "
+	},
+	"studentShort": {
+		"id": 10,
+		"name": "A",
+		"lastname": "B"
+	},
+	"studentLong": {
+		"id": 10,
+		"name": "María de los Ángeles Agustina",
+		"lastname": "Martínez de Aragón Gracia"
+	},
+	"studentSpecialChar": {
+		"id": 10,
+		"name": "{}çñäéíóúÜÇÑÁÉÍÓÚÜ()[]",
+		"lastname": "{}çñäéíóúÜÇÑÁÉÍÓÚÜ()[]"
+	},
+	"studentLimitMin": {
+		"id": 10,
+		"name": "Ana",
+		"lastname": "Bla"
+	},
+	"studentLimitMax": {
+		"id": 10,
+		"name": "María de los Ángeles",
+		"lastname": "de Aragón y Urquijos"
+	},
+	"listStudent": [
+		{
+			"id": 10,
+			"name": "Alicia",
+			"lastname": "Sánchez"
+		},
+		{
+			"id": 20,
+			"name": "Emilia",
+			"lastname": "Martín"
+		},
+		{
+			"id": 30,
+			"name": "Jaime",
+			"lastname": "Urrutia"			
+		}
+	]
+}

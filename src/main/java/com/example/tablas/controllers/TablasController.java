@@ -70,48 +70,6 @@ public class TablasController {
 		studentService.save(StudentMapper.mapper.toEntity(stDto));
 		return "redirect:/";
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	/*
-	 * @PostMapping("/editSt") public String
-	 * editStudent(@Valid @ModelAttribute("std")StudentDto stDto, BindingResult
-	 * bindingResult, Model model) {
-	 * 
-	 * if (bindingResult.hasErrors()) { List<StudentDto> students =
-	 * StudentMapper.mapper.toListStudentDto(studentService.findAll());
-	 * model.addAttribute("students", students); model.addAttribute("st", new
-	 * StudentDto()); return "index"; }
-	 * 
-	 * studentService.save(StudentMapper.mapper.toEntity(stDto)); return
-	 * "redirect:/"; }
-	 */
-
-	/*
-	 * @GetMapping("/pruebaB") public String pruebaB() {
-	 * 
-	 * return "pruebabootstrap"; }
-	 * 
-	 * @PostMapping("/showByStudentId") public String findByStudentId() {
-	 * 
-	 * return "hola";
-	 * 
-	 * }
-	 * 
-	 * @GetMapping("/showByStudentId2/{id}") public ResponseEntity<StudentDto>
-	 * findByStudentId(@PathVariable long id) {
-	 * 
-	 * return
-	 * ResponseEntity.ok(StudentMapper.mapper.toStudentDto(studentService.findById(
-	 * id)));
-	 * 
-	 * }
-	 */
 	
 	// model.addAttribute("errors", bindingResult.getAllErrors());
 	// return "redirect:/index?anchor='formEditModal'";

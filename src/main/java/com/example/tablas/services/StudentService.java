@@ -23,20 +23,28 @@ public class StudentService {
 
 	public Student save(Student student) {
 
+		if (student.getName().isBlank() || student.getLastname().isBlank()) {
+
+			throw new IllegalArgumentException("El nombre y el apellido no pueden estar vacíos");
+		}
+
+		if (student.getName() == null || student.getLastname() == null) {
+			throw new NullPointerException("El nombre y el apellido no pueden estar vacíos");
+		}
+
+		if ((student.getName().length() < 3 || student.getName().length() > 20)
+				|| (student.getLastname().length() < 3 || student.getLastname().length() > 20)) {
+			throw new IllegalArgumentException("El nombre y el apellido deben tener entre 3 y 20 caracteres");
+		}
 		return studentRepository.save(student);
 
 	}
 
-	
-	/* public List<Student> saveAll(List<Student> listStudent) {
-
-		return studentRepository.saveAll(listStudent);
-		
-
-	} */
-
 	public void deleteById(Long id) {
 
+		if (id == null) {
+			throw new IllegalArgumentException("El id no puede ser nulo");
+		}
 		studentRepository.deleteById(id);
 
 	}

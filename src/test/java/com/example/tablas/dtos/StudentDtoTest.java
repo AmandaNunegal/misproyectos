@@ -59,7 +59,7 @@ public class StudentDtoTest {
 	}
 
 	@Test
-	public void newStudent_Valid() {
+	public void newStudent_ok() {
 
 		studentDto = new StudentDto("Ana", "García");
 
@@ -70,7 +70,7 @@ public class StudentDtoTest {
 	}
 
 	@Test
-	public void newStudent_Empty() {
+	public void newStudent_empty() {
 
 		studentDto = new StudentDto("", "");
 
@@ -82,19 +82,19 @@ public class StudentDtoTest {
 	}
 
 	@Test
-	public void newStudent_Space() {
+	public void newStudent_space() {
 
 		studentDto = new StudentDto(" ", " ");
 
 		Set<ConstraintViolation<StudentDto>> errors = validator.validate((studentDto));
 		assertFalse(errors.isEmpty());
-		assertEquals(2, errors.size());
+		assertEquals(4, errors.size());
 		assertErrorContainsName(errors);
 		assertErrorContainsSurname(errors);
 	}
 
 	@Test
-	public void newStudent_Null() {
+	public void newStudent_null() {
 
 		studentDto = new StudentDto(null, null);
 
@@ -107,7 +107,7 @@ public class StudentDtoTest {
 	}
 
 	@Test
-	public void newStudent_Short() {
+	public void newStudent_short() {
 
 		studentDto = new StudentDto("Al", "Ve");
 
@@ -120,7 +120,7 @@ public class StudentDtoTest {
 	}
 
 	@Test
-	public void newStudent_Long() {
+	public void newStudent_long() {
 
 		studentDto = new StudentDto("María de los Ángeles Agustina", "Martínez de León Gracia");
 
@@ -132,7 +132,7 @@ public class StudentDtoTest {
 	}
 
 	@Test
-	public void newStudent_RareCharacters() {
+	public void newStudent_SpecialCharacters() {
 
 		studentDto = new StudentDto("{}çñäéíóúÜÇÑÁÉÍÓÚÜ()[]", "{}çñäéíóúÜÇÑÁÉÍÓÚÜ()[]");
 
@@ -162,3 +162,5 @@ public class StudentDtoTest {
 	}
 
 }
+
+// También agrupar por nombre, y por apellido?
