@@ -66,19 +66,19 @@
 								<form th:action="@{/editSt}" th:object="${std}" method="post">
 									<div class="contEditStudentName">
 										<label for="nameStudentForm2">Nombre</label>
-										<input id="nameStudent" th:text="${name}" />										
+										<input id="nameStudent" th:text="${name}" />
 									</div>
 									<div class="contEditStudentsurnameForm2">
 										<label for="surnameStudent">Apellido</label>
-										<input id="surnameStudent" th:text="${surname}" />										
+										<input id="surnameStudent" th:text="${surname}" />
 									</div>
 								</form>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
 									aria-hidden="true">Cerrar</button>
-								<button type="button" id="editStudent" name="editStudent"
-									class="btn btn-primary" data-bs-dismiss="modal">Guardar cambios</button>
+								<button type="button" id="editStudent" name="editStudent" class="btn btn-primary"
+									data-bs-dismiss="modal">Guardar cambios</button>
 							</div>
 						</div>
 					</div>
